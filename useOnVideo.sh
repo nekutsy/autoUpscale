@@ -47,7 +47,6 @@ rm -rf $tmpPath/outFrames/*
 
 echo "in: $in"
 echo "path: $path"
-echo "name: $name"
 echo resolution: $($ffprobe -v 8 -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 $in)
 fps=$(echo "$($ffprobe -v 8 -of csv=p=0 -select_streams v:0 -show_entries stream=r_frame_rate $in)" | tr -d $'\r' | bc -l)
 lenght=$($ffprobe -i $in -show_entries format=duration -v 8 -of csv="p=0")
@@ -61,14 +60,14 @@ requestedFps=$(printf "%.0f" "$(bc <<< "$fps + 0.5")")
 if [[ "$(printf "%.0f" "$(bc <<< "$fps - 0.5")")" != "$requestedFps" ]] ; then
     if [[ -f "$path/re-encoded" ]] ; then
         echo "video already re-encoded into $requestedFps fps"
-        in="$path/$requestedFps$name"
+        in="$path/$requestedFps.mp4"
         fps=$requestedFps
     else
         echo -n "re-encoding into $requestedFps fps... "
-        ffmpeg -i $in -r 24 -crf 2 $path/$requestedFps$name -v 16 -y 2> $path/log.txt
+        ffmpeg -i $in -r $requestedFps -crf 2 $path/$requestedFps.mp4 -v 16 -y 2> $path/log.txt
         chekOutput
         touch "$path/re-encoded"
-        in="$path/$requestedFps$name"
+        in="$path/$requestedFps.mp4"
         fps=$requestedFps
     fi
 fi
@@ -106,7 +105,7 @@ for ((i=$begin; i<$len; i++)) ; do
     echo
 
     echo -n "assembling a segment $i from frames... "
-    $ffmpeg -framerate $fps -i $tmpPath/outFrames/\%010d.jpg -i $path/segments/$i.mp4 -map 0:v -map 1:a -qscale:v 1 $path/upscaled/chunk$i.mp4 -v 16 -y 2> $path/log.txt
+    $ffmpeg -framerate $fps -i $tmpPath/outFrames/\%010d.jpg -i $path/segments/$i.mp4 -map 0:v -map 1:a:? -qscale:v 1 $path/upscaled/chunk$i.mp4 -v 16 -y 2> $path/log.txt
     chekOutput -n
     
     echo file upscaled/chunk$i.mp4 >> $path/segments.txt

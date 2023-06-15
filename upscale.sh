@@ -64,7 +64,7 @@ if [[ "$useImageMagick" == "true" ]] ; then
 else
     echo -en "\r                                                                  "
     echo -en "\rsegmentNum=$1 framesAmount=$framesAmount in progress..."
-    $waifu2x -i $tmpPath/inFrames -o $tmpPath/outFrames -s 2 -n $noise -j $proc -t 160 -f jpg -m $model 2> /dev/null
+    $waifu2x -i $tmpPath/inFrames -o $tmpPath/outFrames -s $scale -n $noise -j $proc -t 160 -f jpg -m $model 2> /dev/null
     NOW_TIME=$(date +%s)
     echo -en "\r                                                                               "
     echo -en "\rsegmentNum=$1 framesAmount=$framesAmount time=$(($NOW_TIME - $START_TIME))s"

@@ -1,5 +1,5 @@
 waifu2x=<path to waifu2x>
-model=models-upconv_7_anime_style_art_rgb
+model=models-cunet
 scale=2
 noise=2
 proc=4:10:4
