@@ -115,7 +115,7 @@ rm -rf $path/startFrom.txt
 
 echo
 echo -en "\rassembling a video from segments... "
-$ffmpeg -f concat -safe 0 -i $path/segments.txt -c copy $path/$name -y -v 16 2> $path/log.txt
+$ffmpeg -f concat -safe 0 -i $path/segments.txt -c copy $path/out.mp4 -y -v 16 2> $path/log.txt
 chekOutput
 echo -n "deleting video segments... "
 rm -rf $path/segments 2> /dev/null
