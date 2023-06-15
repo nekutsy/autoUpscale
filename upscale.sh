@@ -15,7 +15,7 @@ upscale() {
         cp $tmpPath/inFrames/$j $tmpPath/processed/$j 
         upscaled=$(($upscaled + 1))
     done
-    $waifu2x -i $tmpPath/processed -o $tmpPath/outFrames -s 2 -n $noise -j $proc -t 160 -f jpg -m $model 2> /dev/null
+    $waifu2x -i $tmpPath/processed -o $tmpPath/outFrames -s $scale -n $noise -j $proc -t 160 -f jpg -m $model 2> /dev/null
     queue=()
 }
 

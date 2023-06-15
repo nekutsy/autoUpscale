@@ -1,10 +1,11 @@
-waifu2x=<path to executable file waifu2x>
+waifu2x=<path to waifu2x>
 model=models-upconv_7_anime_style_art_rgb
+scale=2
 noise=2
 proc=4:10:4
-useImageMagick=false
 ffprobe=ffprobe
 ffmpeg=ffmpeg
 tmpPath=workspace/tmp
+useImageMagick=false
 chunkSize=10
 queueLen=100
