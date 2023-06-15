@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s extglob
 
-for i in $(cat variables.txt) ; do declare $i ; done
+for i in $(cat params.txt) ; do declare $i ; done
 
 skipped=0
 upscaled=0
