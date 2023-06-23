@@ -116,6 +116,16 @@ echo
 echo -en "\rassembling a video from segments... "
 $ffmpeg -f concat -safe 0 -i $path/segments.txt -c copy $path/out.mp4 -y -v 16 2> $path/log.txt
 chekOutput
-echo -n "deleting video segments... "
-rm -rf $path/segments 2> /dev/null
-echo "done"
+
+if [[ "$deleteSegments" == "true" ]] ; then
+    echo -n "deleting video segments... "
+    rm -rf $path/segments 2> /dev/null  #folder
+    rm -rf $path/segmented 2> /dev/null #file
+    echo "done"
+fi
+
+if [[ "$deleteUpscaled" == "true" ]] ; then
+    echo -n "deleting upscaled segments... "
+    rm -rf $path/upscaled 2> /dev/null
+    echo "done"
+fi

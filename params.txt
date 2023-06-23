@@ -1,11 +1,13 @@
-waifu2x=<path to waifu2x>
-model=models-cunet
+waifu2x=<path to waifu2x.exe>
+model=models-upconv_7_anime_style_art_rgb
 scale=2
 noise=2
 proc=4:10:4
 ffprobe=ffprobe
 ffmpeg=ffmpeg
-tmpPath=workspace/tmp
+tmpPath=tmp
+deleteUpscaled=false
+deleteSegments=true
 useImageMagick=false
-chunkSize=10
+chunkSize=30
 queueLen=100
